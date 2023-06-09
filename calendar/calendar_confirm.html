@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <t style="font-size:20px">돌핀스 동아리방 사용 등록</t>
+  </head>
+
+  <form action="process.php" method="post" onsubmit="check_values(event)">
+    <input type="text" name="_date" id="date" readonly> 
+    <br>
+    <input type="text" name="_usn" id="usn" placeholder="예약자 이름">
+    <br>
+    <input type="text" name="_cntxt" id="cntxt" placeholder="예약 내용">
+    <br>
+    <input type="text" name="_pw" id="pw" placeholder="개인 식별 비밀번호">
+    <br>
+    <t>사용 시작 시간 : </t>
+    <input type="time" name="_start" id="start" value="12:00"></select>
+    <br>
+    <t>사용 종료 시간 : </t>
+    <input type="time" name="_end" id="end" value="12:00"></select>
+    <br>
+    <input type="submit" value="예약하기">
+    <br>
+  </form>
+
+  <script>
+    // 기본 설정 - 날짜 및 시간 입력
+    var urlParams = new URLSearchParams(window.location.search);
+    var urlData = urlParams.get('data');
+    document.getElementById("date").value = urlData;
+
+    function check_values(event) {
+      // 각 값 받아오기 
+      _username = document.getElementById("usn").value;
+      _content = document.getElementById("cntxt").value;
+      _password = document.getElementById("pw").value;
+      _start = document.getElementById("start").value;
+      _end = document.getElementById("end").value;
+
+      // 빈칸 인식
+      if (_username === ""
+      || _content === ""
+      || _password === ""
+      || _start === ""
+      || _end === "") {
+        alert("빈 칸을 모두 채워 주십시오.");
+        event.preventDefault()
+        return
+      }
+
+      // 시작 및 종료시간 인식
+      const _now = new Date(); // 현재 시간 객체 생성
+      const _comp = new Date('1999-08-28T' + `${_now.getHours()}:${_now.getMinutes()}`) // 현재 시간
+      const _s = new Date('1999-08-28T' + document.getElementById('start').value); // 입력한 시작시간
+      const _e = new Date('1999-08-28T' + document.getElementById('end').value); // 입력한 종료시간
+
+      if (_s > _e) {
+        alert("시간을 알맞게 입력해주십시오.");
+        event.preventDefault();
+        return;
+      }
+
+      if (_s > _now) {
+        alert("예약 시작 시간이 현재 시간보다 이전입니다.");
+        event.preventDefault();
+        return;
+      }
+
+      // 비밀번호 길이 인식
+      console.log(_password.length);
+      if (_password.length < 7) {
+        alert("비밀번호는 최소 7자리 이상이어야 합니다.");
+        event.preventDefault();
+        return;
+      }
+
+      // 모두 충족했다면
+      _yesno = confirm(`아래 예약 정보를 확인해 주십시오.\n
+      예약자 이름 : ${_username}\n
+      예약 내용 : ${_content}\n
+      비밀번호 : ${_password}\n
+      사용 시작 시간 : ${_start}\n
+      사용 종료 시간 : ${_end}\n
+      해당 시간에 예약하시겠습니까?\n
+      [주의] 비밀번호를 분실할 경우, 예약 취소가 불가능합니다.`);
+
+      if (_yesno == false) {
+        event.preventDefault();
+        return;
+      }
+    }
+
+  </script>
+</html>
+
