@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+@keyframes shakeAnimation {
+    0% { transform: translateX(0); }
+    12% { transform: translateX(-10px); }
+    25% { transform: translateX(0px); transform: rotateX(40deg);}
+    37% { transform: translateX(-10px); transform: rotateX(40deg);}
+    50% { transform: translateX(0px); transform: rotate(5deg);}
+    55% { transform: translateX(-10px);}
+    60% { transform: translateX(0); transform: rotate(5deg);}
+    65% { transform: translateX(-10px); }
+    70% { transform: translateX(0); transform: rotate(5deg);}
+    75% { transform: translateX(-10px); }
+    80% { transform: translateX(0); transform: rotate(5deg);}
+}
+
+@keyframes prizeAnimation {
+  0% { transform: rotateX(50deg); opacity:0}
+  15% { transform: rotateX(25deg);}
+  30% { transform: rotateX(10deg);}
+  50% { transform: rotateX(0deg);}
+}
+
+@keyframes buttonAnimation {
+   0% { transform: rotateX(50deg); opacity:0}
+  15% { transform: rotateX(25deg); opacity:0}
+  30% { transform: rotateX(10deg); opacity:0}
+  50% { transform: rotateX(0deg); opacity:0}
+}
+
+
+@import url(https://fonts.google.com/earlyaccess);
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  #title_text {
+    position: absolute;
+    top: 10%;
+    font-size: 75px;
+    color: white;
+    animation: prizeAnimation 1s;
+  }
+
+  #line_s {
+    position: absolute;
+    top: 24%;
+    width: 700px;
+  }
+
+  #line_e {
+    position: absolute;
+    top: 77%;
+    width: 700px;
+  }
+
+  #santaBox {
+    margin-top: 20px;
+    height: 300px;
+    width: 300px;
+    animation: shakeAnimation 1.5s infinite;
+  }
+
+  #prize {
+    margin-top: 20px;
+    height: 300px;
+    width: 300px;
+    animation: prizeAnimation 1s;
+  }
+  
+  .secretCode {
+    margin-top: 20px;
+  }
+
+  input[type="text"], button {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  input[type="text"] {
+    padding: 5px;
+    width: 500px;
+    height: 20px;
+    font-size: 17px;
+    font-family: 맑은고딕;
+    text-align: center;
+    background-color:white;
+    border: 0cm;
+  }
+  
+  button {
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    height: 32px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  #info {
+    position: absolute;
+    font-size: 15px;
+    text-decoration : underline;
+    top: 80%;
+    color: white;
+    cursor: grab;
+  }
+
+  #credit {
+    position: absolute;
+    top: 90%;
+    left: 75%;
+    color: white;
+    font-style: italic;
+    font-weight: 700;
+  }
+  
+  #getPrizeCode {
+    position: absolute;
+    top: 80%;
+    width: 200px;
+    height: 60px;
+    font-size: 15px;
+    animation: buttonAnimation 1s;
+  }
+
+  #description {
+    position: absolute;
+    top: 38%;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    animation: buttonAnimation 0.5s;
+  }
